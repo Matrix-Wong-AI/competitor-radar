@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skill 诞生记</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;700&display=swap');
+        
+        :root {
+            --bg: #0D0D0D;
+            --paper: #F5F1E8;
+            --ink: #1A1A1A;
+            --red: #C41E3A;
+            --gray: #8A8A8A;
+            --grid: #E5E1D8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: var(--paper);
+            color: var(--ink);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 顶部通栏 */
+        .header {
+            background: var(--bg);
+            color: var(--paper);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            letter-spacing: 0.2em;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 20px;
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            background: var(--red);
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 40px 0 30px;
+            position: relative;
+        }
+
+        .hero-label {
+            font-size: 10px;
+            color: var(--gray);
+            letter-spacing: 0.3em;
+            margin-bottom: 16px;
+        }
+
+        .hero-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 42px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero-title span {
+            display: block;
+            color: var(--red);
+        }
+
+        .hero-desc {
+            font-size: 14px;
+            color: var(--gray);
+            padding-left: 20px;
+            border-left: 2px solid var(--red);
+        }
+
+        /* 章节 */
+        .section {
+            padding: 30px 0;
+            border-top: 1px solid var(--grid);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: baseline;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .section-num {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 64px;
+            font-weight: 900;
+            color: var(--grid);
+            line-height: 1;
+        }
+
+        .section-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        /* 对话卡片 */
+        .chat-card {
+            background: white;
+            padding: 20px;
+            margin: 16px 0;
+            box-shadow: 4px 4px 0 var(--grid);
+        }
+
+        .chat-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            color: var(--gray);
+            letter-spacing: 0.1em;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .chat-text {
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        /* 四格规划 */
+        .grid-4 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .grid-item {
+            background: white;
+            padding: 20px 16px;
+            border-top: 3px solid var(--ink);
+        }
+
+        .grid-icon {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .grid-title {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .grid-desc {
+            font-size: 12px;
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        /* 时间线 */
+        .steps {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .steps::before {
+            content: '';
+            position: absolute;
+            left: 8px;
+            top: 8px;
+            bottom: 8px;
+            width: 2px;
+            background: var(--grid);
+        }
+
+        .step {
+            position: relative;
+            padding: 16px 0;
+        }
+
+        .step::before {
+            content: '';
+            position: absolute;
+            left: -26px;
+            top: 20px;
+            width: 10px;
+            height: 10px;
+            background: var(--red);
+            border: 2px solid var(--paper);
+            border-radius: 50%;
+        }
+
+        .step-num {
+            font-size: 11px;
+            color: var(--red);
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            margin-bottom: 4px;
+        }
+
+        .step-title {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .step-desc {
+            font-size: 13px;
+            color: var(--gray);
+        }
+
+        /* 迭代列表 */
+        .iteration-list {
+            margin: 20px 0;
+        }
+
+        .iteration-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--grid);
+        }
+
+        .iteration-item:last-child {
+            border-bottom: none;
+        }
+
+        .iteration-badge {
+            background: var(--bg);
+            color: var(--paper);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
+            margin-right: 16px;
+            flex-shrink: 0;
+        }
+
+        .iteration-content h4 {
+            font-size: 15px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .iteration-content p {
+            font-size: 13px;
+            color: var(--gray);
+        }
+
+        /* 结果卡片 */
+        .result-box {
+            background: var(--bg);
+            color: var(--paper);
+            padding: 32px 24px;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .result-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .result-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .result-sub {
+            font-size: 13px;
+            color: var(--gray);
+            letter-spacing: 0.1em;
+        }
+
+        .result-features {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid #333;
+            font-size: 12px;
+        }
+
+        /* 引用 */
+        .quote-box {
+            padding: 40px 24px;
+            text-align: center;
+            position: relative;
+        }
+
+        .quote-box::before {
+            content: '◆';
+            color: var(--red);
+            font-size: 12px;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .quote-text {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 18px;
+            line-height: 2;
+            color: var(--gray);
+        }
+
+        /* 底部 */
+        .footer {
+            background: var(--bg);
+            color: var(--paper);
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        .footer-mark {
+            width: 60px;
+            height: 60px;
+            border: 2px solid var(--paper);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Noto Serif SC', serif;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .footer-date {
+            font-size: 11px;
+            color: var(--gray);
+            letter-spacing: 0.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div>SKILL BIRTH STORY</div>
+        <div class="header-right">
+            <span><span class="dot"></span> LIVE</span>
+            <span>02:14</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Hero -->
+        <section class="hero">
+            <div class="hero-label">FROM ZERO TO ONE</div>
+            <h1 class="hero-title">
+                一个 Skill
+                <span>从念头到落地</span>
+            </h1>
+            <p class="hero-desc">两小时，把「每天手动查竞品」的麻烦事，变成自动运行的 AI 助手</p>
+        </section>
+
+        <!-- 缘起 -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-num">01</span>
+                <h2 class="section-title">缘起</h2>
+            </div>
+
+            <div class="chat-card">
+                <div class="chat-meta">
+                    <span>MATRIX</span>
+                    <span>21:40</span>
+                </div>
+                <div class="chat-text">「竞品动态实时监控，这个不错，先搞」</div>
+            </div>
+
+            <div class="chat-card">
+                <div class="chat-meta">
+                    <span>BOTFUTURE</span>
+                    <span>21:43</span>
+                </div>
+                <div class="chat-text">「基于你当前的技能配置和可行性，我建议按这个优先级搞...」</div>
+            </div>
+        </section>
+
+        <!-- 规划 -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-num">02</span>
+                <h2 class="section-title">规划</h2>
+            </div>
+
+            <div class="grid-4">
+                <div class="grid-item">
+                    <div class="grid-icon">📡</div>
+                    <div class="grid-title">监控谁</div>
+                    <div class="grid-desc">智谱 · OpenClaw · Claude</div>
+                </div>
+                <div class="grid-item">
+                    <div class="grid-icon">🔍</div>
+                    <div class="grid-title">怎么搜</div>
+                    <div class="grid-desc">Tavily AI 搜索</div>
+                </div>
+                <div class="grid-item">
+                    <div class="grid-icon">📝</div>
+                    <div class="grid-title">输出什么</div>
+                    <div class="grid-desc">动态 + 洞察 + 机会</div>
+                </div>
+                <div class="grid-item">
+                    <div class="grid-icon">📬</div>
+                    <div class="grid-title">推送到哪</div>
+                    <div class="grid-desc">飞书 · 工作日 9点</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 构建 -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-num">03</span>
+                <h2 class="section-title">构建</h2>
+            </div>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-num">STEP 01</div>
+                    <div class="step-title">创建 Skill 骨架</div>
+                    <div class="step-desc">用 OpenClaw 的 skill-creator 工具，生成标准目录结构</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">STEP 02</div>
+                    <div class="step-title">写搜索脚本</div>
+                    <div class="step-desc">调用 Tavily API，输入竞品名，输出最新动态</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">STEP 03</div>
+                    <div class="step-title">配定时任务</div>
+                    <div class="step-desc">「工作日 9 点」自动运行，不用人操心</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">STEP 04</div>
+                    <div class="step-title">测试验证</div>
+                    <div class="step-desc">跑一遍，确认简报格式、链接、洞察都到位</div>
+                </div>
+                <div class="step">
+                    <div class="step-num">STEP 05</div>
+                    <div class="step-title">打包分享</div>
+                    <div class="step-desc">生成 .skill 文件，可以传给任何人安装</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 迭代 -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-num">04</span>
+                <h2 class="section-title">迭代</h2>
+            </div>
+
+            <div class="iteration-list">
+                <div class="iteration-item">
+                    <div class="iteration-badge">ROUND 1</div>
+                    <div class="iteration-content">
+                        <h4>加来源链接</h4>
+                        <p>「每条动态必须有网站来源，否则不权威」</p>
+                    </div>
+                </div>
+                <div class="iteration-item">
+                    <div class="iteration-badge">ROUND 2</div>
+                    <div class="iteration-content">
+                        <h4>加商业洞察</h4>
+                        <p>不只是「发生了什么」，还要「意味着什么」</p>
+                    </div>
+                </div>
+                <div class="iteration-item">
+                    <div class="iteration-badge">ROUND 3</div>
+                    <div class="iteration-content">
+                        <h4>加产品机会</h4>
+                        <p>「竞品做了什么 → 我们要不要跟 → 怎么跟」</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 成果 -->
+        <section class="section">
+            <div class="section-header">
+                <span class="section-num">05</span>
+                <h2 class="section-title">成果</h2>
+            </div>
+
+            <div class="result-box">
+                <div class="result-icon">🎯</div>
+                <div class="result-title">竞品雷达</div>
+                <div class="result-sub">COMPETITOR RADAR</div>
+                <div class="result-features">
+                    <span>自动监控</span>
+                    <span>·</span>
+                    <span>智能分析</span>
+                    <span>·</span>
+                    <span>定时推送</span>
+                </div>
+            </div>
+
+            <div class="quote-box">
+                <div class="quote-text">
+                    把重复的工作交给 AI<br>
+                    把时间留给思考
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-mark">完</div>
+        <div class="footer-date">二〇二六年三月</div>
+    </footer>
+</body>
+</html>
